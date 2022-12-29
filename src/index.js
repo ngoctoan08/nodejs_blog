@@ -13,8 +13,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //MiddleWare de xu ly form gui len
 app.use(
-              express.urlencoded({
-                  extended: true,
+    express.urlencoded({
+        extended: true,
     }),
 ); //xu ly o dang form tu serve
 app.use(express.json()); //xu ly cac thu vien cua js
@@ -23,7 +23,7 @@ app.use(morgan('combined'));
 
 //template engine
 // Register `hbs.engine` with the Express app.
-app.engine(
+                    app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs',
