@@ -12,12 +12,12 @@ const port = 3000
 app.use(express.static(path.join(__dirname,'public')));
 
 //MiddleWare de xu ly form gui len
-app.use(express.urlencoded({
+        app.use(express.urlencoded({
   extended : true
 })); //xu ly o dang form tu serve
 app.use(express.json()); //xu ly cac thu vien cua js
 //HTTP logger
-app.use(morgan('combined'))
+app.use(morgan("combined"));
 
 //template engine
 // Register `hbs.engine` with the Express app.
