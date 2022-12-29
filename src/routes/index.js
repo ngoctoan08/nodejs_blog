@@ -3,9 +3,10 @@ const newsRouter = require('./news');
 const siteRouter = require('./sites');
 
 function route(app) {
-    app.get('/home', (req, res) => { // around function
+    app.get('/home', (req, res) => {
+        // around function
         res.render('home');
-    })
+    });
     // app.get('/news', (req, res) => { // around function
     //     res.send('toandeptrai!')
     // })
@@ -15,7 +16,7 @@ function route(app) {
     app.use('/news', newsRouter);
 
     //goi den path home
-    app.use('/',siteRouter)
+    app.use('/', siteRouter);
 }
 
 module.exports = route;
