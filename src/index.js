@@ -3,7 +3,9 @@ const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 const route = require('./routes/index');
-
+//Connect DB
+const db = require('./config/db/index');
+db.connect();
 const app = express();
 const port = 3000;
 
@@ -23,7 +25,7 @@ app.use(morgan('combined'));
 
 //template engine
 // Register `hbs.engine` with the Express app.
-                    app.engine(
+app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs',
@@ -31,7 +33,7 @@ app.use(morgan('combined'));
 );
 
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources', 'views'));
 
 //routes init
 route(app);
