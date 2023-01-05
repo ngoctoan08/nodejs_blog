@@ -1,6 +1,7 @@
 const router = require('./news');
 const newsRouter = require('./news');
 const siteRouter = require('./sites');
+const courseRouter = require('./course');
 
 function route(app) {
     app.get('/home', (req, res) => {
@@ -13,10 +14,13 @@ function route(app) {
 
     //su dung MVC
     //goi den path news
-    app.use('/news', newsRouter);
+    app.use('/news/', newsRouter);
 
     //goi den path home
     app.use('/', siteRouter);
+
+    // app.use('course', )
+    app.use('/course/', courseRouter);
 }
 
 module.exports = route;

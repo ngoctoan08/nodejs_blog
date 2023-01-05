@@ -1,5 +1,3 @@
-const Course = require('../models/Courses');
-const { mutipleMongooseToObject } = require('../../helper/mongoose');
 class SiteController {
     index(req, res, next) {
         // Viet theo cach call back
@@ -13,9 +11,10 @@ class SiteController {
         // });
 
         //Viet theo cach promises
-        Course.find({})
-            .then((courses) => res.render('home', { courses }))
-            .catch(next);
+        // Course.find({})
+        //     .then((courses) => res.render('home', { courses }))
+        //     .catch(next);
+        res.send('toandaika');
         // res.render('home');
     }
 }
