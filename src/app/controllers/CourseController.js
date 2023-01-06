@@ -4,14 +4,38 @@ const Course = require("../models/Course");
 class CourseController {
     //GET /course
     index(req, res, next) {
-        Course.find({})
+        Course.find({}).lean() //neu 
             .then(courses => {
                 res.render('course/index', {
-                    courses
+                    courses, 
                 })
             });
     }
 
+    // GET /course/edit/:id
+    edit(req, res, next) {
+        Course.findById(req.params.id).lean()
+            .then(course => {
+                res.render('course/edit', {
+                    course
+                })
+            })
+            .catch(next)
+    }
+
+    // PUT /course/:id
+    update(req, res, next) {
+        Course.updateOne({_id: req.params.id}, req.body)
+            .then(() => res.redirect('/course'))
+            .catch(next)
+    }
+
+    // POST /course/:id
+    delete(req, res, next) {
+        Course.updateOne({_id: req.params.id}, req.body)
+            .then(() => res.redirect('/course'))
+            .catch(next)
+    }
 
     // GET create
     create(req, res) {
@@ -23,6 +47,7 @@ class CourseController {
         const course = new Course(req.body);
         course.save()
             .then(() => res.redirect('/course'))
+            .catch(next)
     }
 }
 

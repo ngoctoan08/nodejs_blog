@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 const route = require('./routes/index');
+const methodOverride = require('method-override');
 //Connect DB
 const db = require('./config/db/index');
 db.connect();
@@ -23,12 +24,16 @@ app.use(express.json()); //xu ly cac thu vien cua js
 //HTTP logger
 app.use(morgan('combined'));
 
+//Method Overide
+app.use(methodOverride('_method'));
+
 //template engine
 // Register `hbs.engine` with the Express app.
 app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs',
+        helpers: {sum : (a, b) => a+b}
     }),
 );
 
