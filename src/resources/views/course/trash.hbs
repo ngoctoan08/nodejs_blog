@@ -1,7 +1,19 @@
 
+<form class="mt-4 container-form" method="POST" action="/course/handle-action" >
+<div class="checkall-action d-flex align-items-center text-align-center">
+    <input type="checkbox" id="check-all">
+    <label for="check-all">Check all</label>
+    <select required class="form-select form-select-sm select-all-option" aria-label="Default select example" name="action">
+      <option value=""> -- Action -- </option>
+      <option value="delete">Delete</option>
+    </select>
+    <button type="submit" class="btn btn-primary disable btn-submit-action">Submit</button>
+
+  </div>
 <table class="table">
   <thead>
     <tr>
+      <th scope="col"> </th>
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
@@ -12,13 +24,14 @@
   <tbody>
     {{#each courses }}
      <tr>
+      <th><input type="checkbox" name="courseId[]" value="{{this._id}}"></th>
       <th scope="row"> {{sum @index 1}}</th>
       <td>{{this.name}}</td>
       <td>{{this.price}}</td>
       <td>{{this.description}}</td>
       <td>
-        <a href="/course/{{this._id}}/edit" class="btn btn-primary">Edit</a>
-        <a href="/course/{{this._id}}/delete" class="btn btn-danger">Delete</a>
+        <a href="/course/{{this._id}}/restore" class="btn btn-primary">Restore</a>
+        <a href="/course/{{this._id}}/delete-forever" class="btn btn-danger">Delete forever</a>
       </td>
     </tr>
     {{else}}
@@ -32,3 +45,4 @@
    
   </tbody>
 </table>
+</form>

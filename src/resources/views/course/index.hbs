@@ -1,37 +1,51 @@
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Description</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each courses }}
-     <tr>
-      <th scope="row"> {{sum @index 1}}</th>
-      <td>{{this.name}}</td>
-      <td>{{this.price}}</td>
-      <td>{{this.description}}</td>
-      <td>
-        <a href="/course/{{this._id}}/edit" class="btn btn-primary" >Edit</a>
-        <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id = "{{this._id}}">Delete</a>
-      </td>
-    </tr>
-    {{else}}
-    <tr>
-      <td colspan="5" class="text-center"> You haven't post course!
-        <a href="/course/create">Post course</a>
-      </td>
-    </tr>
-    {{/each}}
+<form class="mt-4 container-form" method="POST" action="/course/handle-action" >
+  <div class="checkall-action d-flex align-items-center text-align-center">
+    <input type="checkbox" id="check-all">
+    <label for="check-all">Check all</label>
+    <select required class="form-select form-select-sm select-all-option" aria-label="Default select example" name="action">
+      <option value=""> -- Action -- </option>
+      <option value="delete">Delete</option>
+    </select>
+    <button type="submit" class="btn btn-primary disable btn-submit-action">Submit</button>
+
+  </div>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col"> </th>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each courses }}
+      <tr>
+        <th><input type="checkbox" name="courseId[]" value="{{this._id}}"></th>
+        <th scope="row"> {{sum @index 1}}</th>
+        <td>{{this.name}}</td>
+        <td>{{this.price}}</td>
+        <td>{{this.description}}</td>
+        <td>
+          <a href="/course/{{this._id}}/edit" class="btn btn-primary" >Edit</a>
+          <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id = "{{this._id}}">Delete</a>
+        </td>
+      </tr>
+      {{else}}
+      <tr>
+        <td colspan="5" class="text-center"> You haven't post course!
+          <a href="/course/create">Post course</a>
+        </td>
+      </tr>
+      {{/each}}
+      
     
-   
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</form>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

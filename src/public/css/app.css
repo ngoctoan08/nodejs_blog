@@ -1,0 +1,15 @@
+h1 {
+  color: green;
+  font-size: 20px; }
+
+.select-all-option {
+  width: 100px !important;
+  margin: 0 8px; }
+
+.form-group {
+  width: 50% !important;
+  margin: auto; }
+
+.nav-header {
+  background-color: orange;
+  text-align: center; }

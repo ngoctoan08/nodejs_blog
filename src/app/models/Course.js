@@ -12,5 +12,5 @@ const Course = new Schema(
 );
 
 // Override all methods and Soft delete
-Course.plugin(mongoose_delete, { deletedAt : true, overrideMethods: true });
+Course.plugin(mongoose_delete, { deletedAt: true, overrideMethods: true });
 module.exports = mongoose.model('Course', Course);

@@ -4,14 +4,15 @@ const morgan = require('morgan');
 const handlebars = require('express-handlebars');
 const route = require('./routes/index');
 const methodOverride = require('method-override');
+
 //Connect DB
 const db = require('./config/db/index');
 db.connect();
 const app = express();
 const port = 3000;
 
-//USE SCSS
-//CAI DAT FILE TINH
+//Use SCSS
+//Set up status file
 app.use(express.static(path.join(__dirname, 'public')));
 
 //MiddleWare de xu ly form gui len
@@ -21,6 +22,7 @@ app.use(
     }),
 ); //xu ly o dang form tu serve
 app.use(express.json()); //xu ly cac thu vien cua js
+
 //HTTP logger
 app.use(morgan('combined'));
 

@@ -1,3 +1,4 @@
+const { json } = require('express');
 const { mutipleMongooseToObject } = require('../../helper/mongoose');
 const Course = require('../models/Course');
 
@@ -45,7 +46,7 @@ class CourseController {
 
     // DELETE /course/:id
     delete(req, res, next) {
-        Course.delete({_id: req.params.id})
+        Course.delete({ _id: req.params.id })
             .then(() => res.redirect('/course'))
             .catch(next);
     }
@@ -62,6 +63,22 @@ class CourseController {
             .save()
             .then(() => res.redirect('/course'))
             .catch(next);
+    }
+
+    //POST course/handle-action
+    handleAction(req, res, next) {
+        // res.json(req.body);
+        switch (req.body.action) {
+            case 'delete':
+                Course.delete({ _id: { $in: req.body.courseId } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+
+            default:
+                res.json('Invalid Action');
+                break;
+        }
     }
 }
 
