@@ -1,15 +1,43 @@
 $(document).ready(function () {
-    var courseId;
-    var formDelete = document.forms['form-course-delete'];
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var clickDelete = $(event.relatedTarget);
-        courseId = clickDelete.data('id');
-    });
-    $('.btn-confirm-delete').click(function () {
-        console.log(courseId);
-        formDelete.action = '/course/' + courseId + '?_method=DELETE';
-        formDelete.submit();
-    });
+
+    //Function process delete and confirm delete
+    function processDelete(formDelete, urlAction='') {
+        var courseId;
+        // var formDelete = document.forms['form-course-delete'];
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var clickDelete = $(event.relatedTarget);
+            courseId = clickDelete.data('id');
+        });
+        $('.btn-confirm-delete').click(function () {
+            console.log(formDelete);
+            formDelete.action = '/course/' + courseId + urlAction + '?_method=DELETE';
+            formDelete.submit(); 
+        });
+    }
+    // formDelete = document.forms['form-course-delete'];
+    // processDelete(formDelete);
+
+    formDeleteForever = document.forms['form-course-delete-forever'];
+    processDelete(formDeleteForever, '/forever');
+
+    //This code process soft delete function
+    // ========================================================= //
+    // var courseId;
+    // var formDelete = document.forms['form-course-delete'];
+    // $('#exampleModal').on('show.bs.modal', function (event) {
+    //     var clickDelete = $(event.relatedTarget);
+    //     courseId = clickDelete.data('id');
+    // });
+    // $('.btn-confirm-delete').click(function () {
+    //     console.log(courseId);
+    //     formDelete.action = '/course/' + courseId + '?_method=DELETE';
+    //     formDelete.submit();
+    // });
+    // ========================================================= //
+
+    // This code process restore function
+
+    
 
     // ========================================================= //
 

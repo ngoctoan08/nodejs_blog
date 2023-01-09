@@ -44,10 +44,26 @@ class CourseController {
             .catch(next);
     }
 
-    // DELETE /course/:id
+    // DELETE /course/:id use soft delete
     delete(req, res, next) {
         Course.delete({ _id: req.params.id })
             .then(() => res.redirect('/course'))
+            .catch(next);
+    }
+
+    deleteForever(req, res, next) {
+        Course.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('/course'))
+            .catch(next);
+    }
+
+    // DELETE /course/:id/delete_f
+
+    // GET /course/:id use restore
+    restore(req, res, next) {
+        // res.json(req.body);
+        Course.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
             .catch(next);
     }
 
@@ -74,7 +90,16 @@ class CourseController {
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
-
+            case 'restore':
+                Course.restore({ _id: { $in: req.body.courseId } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            case 'delete_f':
+                Course.deleteMany({ _id: { $in: req.body.courseId } })   
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
             default:
                 res.json('Invalid Action');
                 break;

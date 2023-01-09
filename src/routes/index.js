@@ -1,4 +1,3 @@
-const router = require('./news');
 const newsRouter = require('./news');
 const siteRouter = require('./sites');
 const courseRouter = require('./course');

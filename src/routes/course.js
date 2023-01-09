@@ -15,6 +15,10 @@ router.put('/:id/', courseController.update);
 
 router.delete('/:id/', courseController.delete);
 
+router.delete('/:id/forever/', courseController.deleteForever);
+
+router.get('/:id/restore', courseController.restore);
+
 router.post('/store', courseController.store);
 
 router.get('/trash', courseController.trash);
