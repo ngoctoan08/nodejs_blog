@@ -5,7 +5,16 @@ const Course = require('../models/Course');
 class CourseController {
     //GET /course/
     index(req, res, next) {
-        Course.find({})
+        let courseQuery = Course.find({});
+        // After get params in URL --> Do sort
+
+        if(req.query.hasOwnProperty('_sort')) {
+            courseQuery = courseQuery.sort({
+                [req.query.column]: req.query.type,
+            })
+        }
+
+        courseQuery
             .lean() //neu
             .then((courses) => {
                 res.render('course/index', {

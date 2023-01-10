@@ -22,4 +22,5 @@ router.get('/:id/restore', courseController.restore);
 router.post('/store', courseController.store);
 
 router.get('/trash', courseController.trash);
+
 module.exports = router;
